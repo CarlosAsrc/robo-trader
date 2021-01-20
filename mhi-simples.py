@@ -1,9 +1,9 @@
 from iqoptionapi.stable_api import IQ_Option
-import time, json
+import time, json, config
 from datetime import datetime
 from dateutil import tz
 
-API = IQ_Option("email", "senha")
+API = IQ_Option(config.email, config.senha)
 check, reason=API.connect()
 print(check, reason)
 API.change_balance('PRACTICE')

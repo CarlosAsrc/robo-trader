@@ -1,9 +1,9 @@
 from iqoptionapi.stable_api import IQ_Option
-import time, json, sys
+import time, json, sys, config
 from datetime import datetime
 from dateutil import tz
 
-API = IQ_Option("email", "senha")
+API = IQ_Option(config.email, config.senha)
 check, reason=API.connect()
 print(check, reason)
 API.change_balance('PRACTICE')
@@ -65,10 +65,10 @@ while True:
 # stop_loss = float(input(' Indique o valor de Stop Loss: '))
 # stop_gain = float(input(' Indique o valor de Stop Gain: '))
 
-par = 'AUDJPY'
+par = 'GBPJPY'
 valor_entrada = 5.0
 valor_entrada_b = valor_entrada
-martingale = 5
+martingale = 6
 martingale += 1
 stop_loss = 300
 stop_gain = 300

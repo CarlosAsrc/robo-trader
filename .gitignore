@@ -1,0 +1,8 @@
+*.py[cod]
+build/
+dist/
+*.egg-info/
+.vscode/
+test.py
+config.py
+iqoptionapi
