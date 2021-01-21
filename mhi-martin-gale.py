@@ -47,6 +47,42 @@ def Payout(par):
 	return d
 
 
+def DeveEntrar():
+	segundos = float(((datetime.now()).strftime('%M.%S'))[2:])
+	return True if (segundos >= 0.58 and segundos <= 0.59) else False
+
+def DirecaoOrdem():
+	dir = False
+	velas = API.get_candles(par, 60, 5, time.time())
+	
+
+	velas[0] = 'g' if velas[0]['open'] < velas[0]['close'] else 'r' if velas[0]['open'] > velas[0]['close'] else 'd'
+	velas[1] = 'g' if velas[1]['open'] < velas[1]['close'] else 'r' if velas[1]['open'] > velas[1]['close'] else 'd'
+	velas[2] = 'g' if velas[2]['open'] < velas[2]['close'] else 'r' if velas[2]['open'] > velas[2]['close'] else 'd'
+	velas[3] = 'g' if velas[3]['open'] < velas[3]['close'] else 'r' if velas[3]['open'] > velas[3]['close'] else 'd'
+	velas[4] = 'g' if velas[4]['open'] < velas[4]['close'] else 'r' if velas[4]['open'] > velas[4]['close'] else 'd'
+	
+	# MHI CONSIDERANDO 5 VELAS:
+	# cores = velas[0] + ' ' + velas[1] + ' ' + velas[2] + ' ' + velas[3] + ' ' + velas[4]		
+	# if cores.count('g') > cores.count('r') : dir = 'put'
+	# if cores.count('r') > cores.count('g') : dir = 'call'
+	
+	# APÓS SEQUENCIAL DE 3 VELAS:
+	cores = velas[2] + ' ' + velas[3] + ' ' + velas[4]
+
+	print('Verificando candles..', end='')
+	# f.write('\nVerificando candles..')
+	print(cores)
+	# f.write(cores)
+	# f.flush()
+
+	if cores.count('g') == 3 : dir = 'put'
+	if cores.count('r') == 3 : dir = 'call'
+	
+	return dir
+
+
+
 while True:
     if API.check_connect()==False:
         print("Erro ao conectar")
@@ -66,51 +102,31 @@ while True:
 # stop_gain = float(input(' Indique o valor de Stop Gain: '))
 
 par = 'GBPJPY'
-valor_entrada = 5.0
+valor_entrada = 10.0
 valor_entrada_b = valor_entrada
-martingale = 6
+martingale = 5
 martingale += 1
 stop_loss = 300
 stop_gain = 300
 
 
-f = open("./RESULTADOS/mhi-martin-gale." + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") + ".txt", "w")
+# f = open("./RESULTADOS/mhi-martin-gale." + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") + ".txt", "w")
 
 
 lucro = 0
 payout = Payout(par)
 
 while True:
-	segundos = float(((datetime.now()).strftime('%M.%S'))[2:])
-	entrar = True if (segundos >= 0.58 and segundos <= 0.59) or segundos <= 0.02 else False
-	# print('Hora de entrar?',entrar,'/ segundos:',segundos)
+	entrar = DeveEntrar()
 	
 	if entrar:
-		print('\n\nIniciando operação!')
-		f.write('\n\nIniciando operação!')
-		dir = False
-		print('Verificando cores..', end='')
-		f.write('\nVerificando cores..')
-		velas = API.get_candles(par, 60, 5, time.time())
-		
-		velas[0] = 'g' if velas[0]['open'] < velas[0]['close'] else 'r' if velas[0]['open'] > velas[0]['close'] else 'd'
-		velas[1] = 'g' if velas[1]['open'] < velas[1]['close'] else 'r' if velas[1]['open'] > velas[1]['close'] else 'd'
-		velas[2] = 'g' if velas[2]['open'] < velas[2]['close'] else 'r' if velas[2]['open'] > velas[2]['close'] else 'd'
-		velas[3] = 'g' if velas[3]['open'] < velas[3]['close'] else 'r' if velas[3]['open'] > velas[3]['close'] else 'd'
-		velas[4] = 'g' if velas[4]['open'] < velas[4]['close'] else 'r' if velas[4]['open'] > velas[4]['close'] else 'd'
-		
-		cores = velas[0] + ' ' + velas[1] + ' ' + velas[2] + ' ' + velas[3] + ' ' + velas[4]
-		print(cores)
-		f.write(cores)
-		f.flush()
-
-		if cores.count('g') > cores.count('r') : dir = 'put'
-		if cores.count('r') > cores.count('g') : dir = 'call'
-		
+		dir = DirecaoOrdem()
 		
 		if dir:
+			print('\n\nIniciando operação!')
+			# f.write('\n\nIniciando operação!')
 			print('Direção:',dir)
-			f.write('\nDireção: ' + dir)
+			# f.write('\nDireção: ' + dir)
 
 			valor_entrada = valor_entrada_b
 
@@ -126,15 +142,14 @@ while True:
 							lucro += round(valor, 2)
 
 							print('Resultado operação: ', end='')
-							print('WIN /' if valor > 0 else 'LOSS /' , round(valor, 2) ,'/', round(lucro, 2),('/ '+str(i)+ ' GALE' if i > 0 else '' ))
+							print('WIN /' if valor > 0 else 'LOSS /' , round(valor, 2), ('/ '+str(i)+ ' GALE' if i > 0 else '' ))
 							valor_entrada = Martingale(valor_entrada, payout)
-							print('LUCRO: ', round(lucro, 2))
+							print('LUCRO TOTAL: ', round(lucro, 2))
 							
-							f.write('\nResultado operação: ')
-							f.write('WIN '+str(round(valor, 2)) if valor > 0 else 'LOSS '+str(round(valor, 2)))
-							f.flush()
+							# f.write('\nResultado operação: ')
+							# f.write('WIN '+str(round(valor, 2)) if valor > 0 else 'LOSS '+str(round(valor, 2)))
+							# f.flush()
 							stop(lucro, stop_gain, stop_loss)
-
 
 							break
 								
