@@ -1,6 +1,7 @@
 from iqoptionapi.stable_api import IQ_Option
 import time, json, sys, config
 from datetime import datetime
+from trade_config import *
 from dateutil import tz
 
 API = IQ_Option(config.email, config.senha)
@@ -101,14 +102,6 @@ while True:
 # stop_loss = float(input(' Indique o valor de Stop Loss: '))
 # stop_gain = float(input(' Indique o valor de Stop Gain: '))
 
-par = 'GBPJPY'
-valor_entrada = 10.0
-valor_entrada_b = valor_entrada
-martingale = 5
-martingale += 1
-stop_loss = 300
-stop_gain = 300
-
 
 # f = open("./RESULTADOS/mhi-martin-gale." + datetime.now().strftime("%Y-%m-%d_%H:%M:%S") + ".txt", "w")
 
@@ -143,7 +136,8 @@ while True:
 
 							print('Resultado operação: ', end='')
 							print('WIN /' if valor > 0 else 'LOSS /' , round(valor, 2), ('/ '+str(i)+ ' GALE' if i > 0 else '' ))
-							valor_entrada = Martingale(valor_entrada, payout)
+							if (i <= gale_limite):
+								valor_entrada = Martingale(valor_entrada, payout)
 							print('LUCRO TOTAL: ', round(lucro, 2))
 							
 							# f.write('\nResultado operação: ')
