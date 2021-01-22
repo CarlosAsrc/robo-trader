@@ -50,7 +50,8 @@ def Payout(par):
 
 def DeveEntrar():
 	segundos = float(((datetime.now()).strftime('%M.%S'))[2:])
-	return True if (segundos >= 0.58 and segundos <= 0.59) else False
+	# return True if (segundos >= 0.58 and segundos <= 0.59) else False
+	return True if (segundos == 0.59) else False
 
 def DirecaoOrdem():
 	dir = False
@@ -136,7 +137,7 @@ while True:
 
 							print('Resultado operação: ', end='')
 							print('WIN /' if valor > 0 else 'LOSS /' , round(valor, 2), ('/ '+str(i)+ ' GALE' if i > 0 else '' ))
-							if (i <= gale_limite):
+							if (i < gale_limite):
 								valor_entrada = Martingale(valor_entrada, payout)
 							print('LUCRO TOTAL: ', round(lucro, 2))
 							
@@ -152,4 +153,4 @@ while True:
 				else:
 					print('\nERRO AO REALIZAR OPERAÇÃO\n\n')
 				
-	time.sleep(0.5)
+	time.sleep(0.2)
