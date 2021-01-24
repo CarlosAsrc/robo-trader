@@ -1,4 +1,4 @@
-par = 'EURJPY'
+par = 'USDJPY'
 valor_entrada = 5.0
 valor_entrada_b = valor_entrada
 martingale = 7
