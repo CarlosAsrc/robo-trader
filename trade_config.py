@@ -4,5 +4,6 @@ valor_entrada_b = valor_entrada
 martingale = 7
 gale_limite = 3
 martingale += 1
+sequencial_velas_minimas = 5
 stop_loss = 300
 stop_gain = 300

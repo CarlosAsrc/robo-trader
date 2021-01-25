@@ -78,8 +78,8 @@ def DirecaoOrdem():
 	# f.write(cores)
 	# f.flush()
 
-	if cores.count('g') == 6 : dir = 'put'
-	if cores.count('r') == 6 : dir = 'call'
+	if cores.count('g') == sequencial_velas_minimas : dir = 'put'
+	if cores.count('r') == sequencial_velas_minimas : dir = 'call'
 	
 	return dir
 
