@@ -78,8 +78,8 @@ def DirecaoOrdem():
 	# f.write(cores)
 	# f.flush()
 
-	if cores.count('g') == 3 : dir = 'put'
-	if cores.count('r') == 3 : dir = 'call'
+	if cores.count('g') == 6 : dir = 'put'
+	if cores.count('r') == 6 : dir = 'call'
 	
 	return dir
 
