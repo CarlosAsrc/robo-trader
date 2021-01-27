@@ -70,7 +70,7 @@ def DirecaoOrdem():
 	# if cores.count('r') > cores.count('g') : dir = 'call'
 	
 	# APÓS SEQUENCIAL DE 3 VELAS:
-	cores = velas[2] + ' ' + velas[3] + ' ' + velas[4]
+	cores = velas[0] + ' ' + velas[1] + ' ' + velas[2] + ' ' + velas[3] + ' ' + velas[4]
 
 	print('Verificando candles..', end='')
 	# f.write('\nVerificando candles..')
