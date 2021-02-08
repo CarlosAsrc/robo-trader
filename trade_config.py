@@ -1,9 +1,9 @@
 par = 'GBPJPY'
-valor_entrada = 3.0
+valor_entrada = 2.0
 valor_entrada_b = valor_entrada
-martingale = 4
-gale_limite = 3
+martingale = 0
+gale_limite = 0
 martingale += 1
 sequencial_velas_minimas = 8
-stop_loss = 300
-stop_gain = 300
+stop_loss = 100
+stop_gain = 100
