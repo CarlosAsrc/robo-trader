@@ -55,7 +55,7 @@ valor_entrada = 2.0
 
 while True:
 	minutos = float(((datetime.now()).strftime('%M.%S'))[2:])
-	return True if (segundos >= 0.58 and segundos <= 0.59) else False
+	entrar = True if (segundos >= 0.58 and segundos <= 0.59) else False
 	# print('Hora de entrar?',entrar,'/ Minutos:',minutos)
 	
 	if entrar:
