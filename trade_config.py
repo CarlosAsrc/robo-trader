@@ -1,5 +1,5 @@
 par = 'GBPJPY'
-valor_entrada = 10.0
+valor_entrada = 3.0
 valor_entrada_b = valor_entrada
 martingale = 4
 gale_limite = 3

@@ -50,13 +50,13 @@ def timestamp_converter(x): # Função para converter timestamp
 
 
 
-par = input(' Indique uma paridade para operar: ')
-valor_entrada = float(input(' Indique um valor para entrar: '))
+par = 'GBPJPY'
+valor_entrada = 2.0
 
 while True:
 	minutos = float(((datetime.now()).strftime('%M.%S'))[2:])
-	entrar = True if (minutos >= 0.58 and minutos <= 0.59) or minutos == 0.00 else False
-	print('Hora de entrar?',entrar,'/ Minutos:',minutos)
+	return True if (segundos >= 0.58 and segundos <= 0.59) else False
+	# print('Hora de entrar?',entrar,'/ Minutos:',minutos)
 	
 	if entrar:
 		print('\n\nIniciando operação!')
@@ -71,8 +71,11 @@ while True:
 		cores = velas[0] + ' ' + velas[1] + ' ' + velas[2]		
 		print(cores)
 	
-		if cores.count('g') > cores.count('r') and cores.count('d') == 0 : dir = 'put'
-		if cores.count('r') > cores.count('g') and cores.count('d') == 0 : dir = 'call'
+		# if cores.count('g') > cores.count('r') and cores.count('d') == 0 : dir = 'put'
+		# if cores.count('r') > cores.count('g') and cores.count('d') == 0 : dir = 'call'
+
+		if cores.count('g') == 3 : dir = 'put'
+		if cores.count('r') == 3 : dir = 'call'
 		
 		
 		if dir:
