@@ -164,4 +164,4 @@ while True:
 				else:
 					print('\nERRO AO REALIZAR OPERAÇÃO\n\n')
 				
-	time.sleep(0.2)
+	time.sleep(0.5)
