@@ -1,9 +1,9 @@
-par = 'GBPJPY'
-valor_entrada = 10.0
+par = 'USDJPY-OTC'
+valor_entrada = 2.0
 valor_entrada_b = valor_entrada
-martingale = 10
-gale_limite = 10
+martingale = 0
+gale_limite = 0
 martingale += 1
 sequencial_velas_minimas = 8.0
-stop_loss = 400
-stop_gain = 400
+stop_loss = 50
+stop_gain = 50

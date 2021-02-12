@@ -55,14 +55,14 @@ def DeveEntrar():
 
 def DirecaoOrdem():
 	dir = False
-	velas = API.get_candles(par, 60, 5, time.time())
+	velas = API.get_candles(par, 60, 3, time.time())
 	
 
 	velas[0] = 'g' if velas[0]['open'] < velas[0]['close'] else 'r' if velas[0]['open'] > velas[0]['close'] else 'd'
 	velas[1] = 'g' if velas[1]['open'] < velas[1]['close'] else 'r' if velas[1]['open'] > velas[1]['close'] else 'd'
 	velas[2] = 'g' if velas[2]['open'] < velas[2]['close'] else 'r' if velas[2]['open'] > velas[2]['close'] else 'd'
-	velas[3] = 'g' if velas[3]['open'] < velas[3]['close'] else 'r' if velas[3]['open'] > velas[3]['close'] else 'd'
-	velas[4] = 'g' if velas[4]['open'] < velas[4]['close'] else 'r' if velas[4]['open'] > velas[4]['close'] else 'd'
+	# velas[3] = 'g' if velas[3]['open'] < velas[3]['close'] else 'r' if velas[3]['open'] > velas[3]['close'] else 'd'
+	# velas[4] = 'g' if velas[4]['open'] < velas[4]['close'] else 'r' if velas[4]['open'] > velas[4]['close'] else 'd'
 	# velas[5] = 'g' if velas[5]['open'] < velas[5]['close'] else 'r' if velas[5]['open'] > velas[5]['close'] else 'd'
 	# velas[6] = 'g' if velas[6]['open'] < velas[6]['close'] else 'r' if velas[6]['open'] > velas[6]['close'] else 'd'
 	# velas[7] = 'g' if velas[7]['open'] < velas[7]['close'] else 'r' if velas[7]['open'] > velas[7]['close'] else 'd'
@@ -76,7 +76,7 @@ def DirecaoOrdem():
 	# if cores.count('r') > cores.count('g') : dir = 'call'
 	
 	# ÚLTIMAS 5 VELAS:
-	cores = velas[0] + ' ' + velas[1] + ' ' + velas[2] + ' ' + velas[3] + ' ' + velas[4]
+	cores = velas[0] + ' ' + velas[1] + ' ' + velas[2]
 
 	print('Verificando candles..', end='')
 	# f.write('\nVerificando candles..')
