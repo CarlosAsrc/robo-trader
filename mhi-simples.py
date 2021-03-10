@@ -50,7 +50,7 @@ def timestamp_converter(x): # Função para converter timestamp
 
 
 
-par = 'GBPJPY'
+par = 'USDJPY'
 valor_entrada = 2.0
 
 while True:
@@ -71,22 +71,25 @@ while True:
 		cores = velas[0] + ' ' + velas[1] + ' ' + velas[2]		
 		print(cores)
 	
-		# if cores.count('g') > cores.count('r') and cores.count('d') == 0 : dir = 'put'
-		# if cores.count('r') > cores.count('g') and cores.count('d') == 0 : dir = 'call'
+		if cores.count('g') > cores.count('r') and cores.count('d') == 0 : dir = 'put'
+		if cores.count('r') > cores.count('g') and cores.count('d') == 0 : dir = 'call'
 
-		if cores.count('g') == 3 : dir = 'put'
-		if cores.count('r') == 3 : dir = 'call'
+		# if cores.count('g') == 3 : dir = 'put'
+		# if cores.count('r') == 3 : dir = 'call'
 		
 		
 		if dir:
 			print('Direção:',dir)
 			
-			status,id = API.buy_digital_spot(par, valor_entrada, dir, 1)
+			status,id = API.buy(valor_entrada, par, dir, 1)
 			
 			if status:
 				while True:
-					status,valor = API.check_win_digital_v2(id)
-					
+					try:
+						status,valor = API.check_win_v3(id)
+					except:
+						status = True
+						valor = 0
 					if status:
 						print('Resultado operação: ', end='')
 						print('WIN /' if valor > 0 else 'LOSS /' , round(valor, 2))
