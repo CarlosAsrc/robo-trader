@@ -55,7 +55,7 @@ def DeveEntrar():
 
 def DirecaoOrdem():
 	dir = False
-	velas = API.get_candles(par, 60, 8, time.time())
+	velas = API.get_candles(par, 60, 9, time.time())
 	
 
 	velas[0] = 'g' if velas[0]['open'] < velas[0]['close'] else 'r' if velas[0]['open'] > velas[0]['close'] else 'd'
@@ -66,7 +66,7 @@ def DirecaoOrdem():
 	velas[5] = 'g' if velas[5]['open'] < velas[5]['close'] else 'r' if velas[5]['open'] > velas[5]['close'] else 'd'
 	velas[6] = 'g' if velas[6]['open'] < velas[6]['close'] else 'r' if velas[6]['open'] > velas[6]['close'] else 'd'
 	velas[7] = 'g' if velas[7]['open'] < velas[7]['close'] else 'r' if velas[7]['open'] > velas[7]['close'] else 'd'
-	# velas[8] = 'g' if velas[8]['open'] < velas[8]['close'] else 'r' if velas[8]['open'] > velas[8]['close'] else 'd'
+	velas[8] = 'g' if velas[8]['open'] < velas[8]['close'] else 'r' if velas[8]['open'] > velas[8]['close'] else 'd'
 	# velas[9] = 'g' if velas[9]['open'] < velas[9]['close'] else 'r' if velas[9]['open'] > velas[9]['close'] else 'd'
 
 	
@@ -76,11 +76,11 @@ def DirecaoOrdem():
 	# if cores.count('r') > cores.count('g') : dir = 'call'
 	
 	# APÓS SEQUENCIAL DE 8 VELAS:
-	cores = velas[0] + ' ' + velas[1] + ' ' + velas[2] + ' ' + velas[3] + ' ' + velas[4] + ' ' + velas[5] + ' ' + velas[6] + ' ' + velas[7]
+	cores = velas[0] + ' ' + velas[1] + ' ' + velas[2] + ' ' + velas[3] + ' ' + velas[4] + ' ' + velas[5] + ' ' + velas[6] + ' ' + velas[7] + ' ' + velas[8]
 
-	print('Verificando candles..', end='')
+	# print('Verificando candles..', end='')
 	# f.write('\nVerificando candles..')
-	print(cores)
+	# print(cores)
 	# f.write(cores)
 	# f.flush()
 
